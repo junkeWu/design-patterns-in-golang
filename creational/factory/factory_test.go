@@ -2,11 +2,12 @@ package factory
 
 import "testing"
 
-func TestCreate(t *testing.T) {
-	apple := Apple{}
-	apple.Create()
-	//
-	bear := Bear{}
-	bear.Create()
+func TestFactory(t *testing.T) {
+	af := AppleFactory{}
+	af.create().eat()
+
+	bf := BearFactory{}
+	bf.create().eat()
+
 }
 

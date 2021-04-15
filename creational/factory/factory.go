@@ -1,25 +1,40 @@
 package factory
 
-import "fmt"
-
+import (
+	"fmt"
+)
 type Apple struct {}
 
 type Bear struct {}
 
-type AppleFactory interface {
-	Create()
+type Fruit interface {
+	eat()
 }
 
-type BearFactory interface {
-	Create()
+type AppleFactory struct {}
+
+type BearFactory struct {}
+
+
+type FruitFactory interface {
+	create() Fruit
 }
 
-func (a *Apple)Create() {
+func (a *AppleFactory) create() Fruit{
 	fmt.Println("appleFactory: create a apple")
+	return &Apple{}
 }
 
-func (a *Bear)Create() {
+func (b *BearFactory) create() Fruit{
 	fmt.Println("bearFactory: create a bear")
+	return &Bear{}
+}
+
+func (a *Apple) eat() {
+	fmt.Println("Apple: eating apple")
 }
 
 
+func (b *Bear) eat() {
+	fmt.Println("Bear: eating bear")
+}

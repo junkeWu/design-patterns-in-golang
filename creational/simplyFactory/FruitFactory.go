@@ -7,33 +7,33 @@ import (
 type Factory struct {}
 
 type FruitFactory interface {
-	Create()
+	create()
 }
 
-type Apple struct {
+type apple struct {
 	color string
 	Size  int
 }
 
-type Bear struct {
+type bear struct {
 	color string
 	Size  int
 }
 
-func (a *Apple)Create() {
+func (a *apple) create() {
 	fmt.Println("produce a apple")
 }
 
-func (a *Bear)Create() {
+func (a *bear) create() {
 	fmt.Println("produce a bear")
 }
 
 func (f *Factory) NewFruit(s string) (FruitFactory,error) {
 	switch s {
 		case "apple":
-			return &Apple{}, nil
+			return &apple{}, nil
 		case "bear":
-			return &Bear{}, nil
+			return &bear{}, nil
 		default:
 			return nil, errors.New("fruit: this fruit is not exiting")
 	}
