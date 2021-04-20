@@ -14,11 +14,12 @@ func TestNewFruitFactory(t *testing.T) {
 		return
 	}
 	apple.create()
-	bear, err := new(Factory).NewFruit("bear")
+	pear, err := new(Factory).NewFruit("pear")
 	if err != nil {
 		err := fmt.Errorf("Wrap了一个错误 %w", err)
 		fmt.Println(errors.Unwrap(err))
+		fmt.Println(err)
 		return
 	}
-	bear.create()
+	pear.create()
 }

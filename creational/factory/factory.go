@@ -5,7 +5,7 @@ import (
 )
 type Apple struct {}
 
-type Bear struct {}
+type Pear struct {}
 
 type Fruit interface {
 	eat()
@@ -26,8 +26,8 @@ func (a *AppleFactory) create() Fruit{
 }
 
 func (b *BearFactory) create() Fruit{
-	fmt.Println("bearFactory: create a bear")
-	return &Bear{}
+	fmt.Println("bearFactory: create a pear")
+	return &Pear{}
 }
 
 func (a *Apple) eat() {
@@ -35,6 +35,6 @@ func (a *Apple) eat() {
 }
 
 
-func (b *Bear) eat() {
-	fmt.Println("Bear: eating bear")
+func (b *Pear) eat() {
+	fmt.Println("Pear: eating pear")
 }

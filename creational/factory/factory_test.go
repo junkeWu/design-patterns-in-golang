@@ -6,8 +6,8 @@ func TestFactory(t *testing.T) {
 	af := AppleFactory{}
 	af.create().eat()
 
-	bf := BearFactory{}
-	bf.create().eat()
+	fp := BearFactory{}
+	fp.create().eat()
 
 }
 

@@ -6,7 +6,7 @@ import (
 
 type Apple struct {}
 
-type Bear struct {}
+type Pear struct {}
 
 type Banana struct {}
 
@@ -33,7 +33,7 @@ func (a *AppleFactory) create() Fruit {
 
 func (b *BearFactory) create() Fruit {
 	fmt.Println("bearFactory: create a bear")
-	return &Bear{}
+	return &Pear{}
 }
 func (b *BananaFactory) create() Fruit {
 	fmt.Println("bananaFactory: create a banana")
@@ -44,8 +44,8 @@ func (a *Apple) eat() {
 	fmt.Println("Apple: eating apple")
 }
 
-func (b *Bear) eat() {
-	fmt.Println("Bear: eating bear")
+func (b *Pear) eat() {
+	fmt.Println("Pear: eating pear")
 }
 
 func (b *Banana) eat() {
