@@ -22,4 +22,5 @@ func TestNewFruitFactory(t *testing.T) {
 		return
 	}
 	pear.create()
+
 }

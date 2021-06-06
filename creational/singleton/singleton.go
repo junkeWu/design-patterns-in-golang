@@ -2,6 +2,7 @@ package singleton
 
 import (
 	"sync"
+	"time"
 )
 
 type singleton struct{
@@ -19,7 +20,7 @@ var (
 func getInstanceLazy() *singleton {
 	if instance == nil {
 		// 模拟多线程
-		//time.Sleep(100000)
+		time.Sleep(100)
 		instance = &singleton{}
 		return instance
 	}

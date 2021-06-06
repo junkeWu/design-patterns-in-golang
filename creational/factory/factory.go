@@ -20,6 +20,14 @@ type FruitFactory interface {
 	create() Fruit
 }
 
+func (a *Apple) eat() {
+	fmt.Println("Apple: eating apple")
+}
+
+func (b *Pear) eat() {
+	fmt.Println("Pear: eating pear")
+}
+
 func (a *AppleFactory) create() Fruit{
 	fmt.Println("appleFactory: create a apple")
 	return &Apple{}
@@ -30,11 +38,4 @@ func (b *BearFactory) create() Fruit{
 	return &Pear{}
 }
 
-func (a *Apple) eat() {
-	fmt.Println("Apple: eating apple")
-}
 
-
-func (b *Pear) eat() {
-	fmt.Println("Pear: eating pear")
-}
