@@ -1,8 +1,11 @@
 package bridge
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
-func TestBlue_GetColor(t *testing.T) {
+func TestDraw(t *testing.T) {
 	rectangle := &Rectangle{}
 	rectangle.SetColor(&Green{})
 	rectangle.Draw()
@@ -10,8 +13,13 @@ func TestBlue_GetColor(t *testing.T) {
 	triangle := &Triangle{}
 	triangle.SetColor(&Red{})
 	triangle.Draw()
-
 	round := Round{}
 	round.SetColor(&Blue{})
 	round.Draw()
+
+	square := &Square{}
+	square.Draw()
+	fmt.Print("给平方形加个颜色:")
+	square.SetColor(&Red{})
+	square.Draw()
 }
