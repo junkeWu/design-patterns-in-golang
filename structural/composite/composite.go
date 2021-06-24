@@ -22,6 +22,7 @@ func NewEmployee(name, dept string, salary int) *Employee {
 		Subordinates: sub,
 	}
 }
+
 func (e *Employee) Add(emp Employee) {
 	e.Subordinates.PushBack(emp)
 }

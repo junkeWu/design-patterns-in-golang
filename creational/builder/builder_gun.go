@@ -1,10 +1,11 @@
 package builder
 
+// Gun build of complex object
 type Gun struct {
 	Type string
 	Size string
 }
-
+// SetType object attribute's function
 func (g *Gun) SetType(tp string) {
 	g.Type = tp
 }
@@ -18,16 +19,16 @@ func (g *Gun) GetSize() string {
 	return g.Size
 }
 
+// IGunBuilder builder interface in order to standardise Builder
 type IGunBuilder interface {
 	SetType(tp string) IGunBuilder
 	SetSize(size string) IGunBuilder
 	Build() *Gun
 }
-
+// GunBuilder concrete builder implement struct
 type GunBuilder struct {
 	gun *Gun
 }
-
 func (b *GunBuilder) SetType(tp string) IGunBuilder {
 	if b.gun == nil {
 		b.gun = &Gun{}
@@ -54,6 +55,7 @@ func (b GunBuilder) Build() *Gun {
  	return b.gun
 }
 
+// GunDirector in order to standard process of builder build
 type GunDirector struct {
 	builder IGunBuilder
 }
