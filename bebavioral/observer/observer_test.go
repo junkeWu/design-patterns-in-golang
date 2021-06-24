@@ -1,25 +1,22 @@
 package observer
 
 import (
-	"sync"
+	"fmt"
 	"testing"
-	"time"
 )
 
 func Test(t *testing.T) {
-	//for x:=range Fib(20){
-	//	fmt.Println(x)
-	//}
+	shirtItem := NewItem("Nike Shirt")
 
-	n := eventObservable{Observers: sync.Map{}}
+	observerFirst := &Customer{id: "abc@gmail.com"}
+	observerSecond := &Customer{id: "xyz@gmail.com"}
 
-	obs1 := eventObserver{ID: 1, Time: time.Now()}
-	obs2 := eventObserver{ID: 2, Time: time.Now()}
+	shirtItem.register(observerFirst)
+	shirtItem.register(observerSecond)
 
-	n.AddListener(obs1)
-	n.AddListener(obs2)
-
-	for x := range Fib(10) {
-		n.Notify(Event{Data: x})
+	shirtItem.updateAvailability()
+	for i, observer := range shirtItem.observerList {
+		fmt.Printf(fmt.Sprintf("%v %v", i, observer))
 	}
+
 }

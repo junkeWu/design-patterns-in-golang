@@ -1,63 +1,35 @@
 package observer
 
-import (
-	"fmt"
-	"sync"
-	"time"
-)
-
-type Event struct {
-	Data int
-}
+import "fmt"
 
 // 观察者接口
+
 type Observer interface {
-	NotifyCallback(event Event)
+	update(string)
+	getID() string
 }
 
-// 被观察者接口
-type Observable interface {
-	AddListener(observer Observer)
-	RemoveListener(observer Observer)
-	Notify(event Event)
-}
-
-type eventObserver struct {
-	ID   int
-	Time time.Time
-}
-type eventObservable struct {
-	Observers sync.Map
-}
-
-func (e eventObserver) NotifyCallback(event Event) {
-	fmt.Printf("Recieved: %d after %v\n", event.Data, time.Since(e.Time))
-}
-
-func (e *eventObservable) AddListener(obs Observer) {
-	e.Observers.Store(obs, struct{}{})
-}
-
-func (e *eventObservable) RemoveListener(obs Observer) {
-	e.Observers.Delete(obs)
-}
-func (e *eventObservable) Notify(event Event) {
-	e.Observers.Range(func(key, value interface{}) bool {
-		if key == nil {
-			return false
+func RemoveFromSlice(observerList []Observer,obs Observer) []Observer {
+	observerListLength := len(observerList)
+	for i, observer := range observerList {
+		if obs.getID() == observer.getID() {
+			observerList[observerListLength-1], observerList[i] = observerList[i], observerList[observerListLength-1]
+			return observerList[:observerListLength-1]
 		}
-		key.(Observer).NotifyCallback(event)
-		return true
-	})
+	}
+	return observerList
 }
 
-func Fib(n int) chan int {
-	out := make(chan int)
-	go func() {
-		defer close(out)
-		for i, j := 0, 1; i < n; i, j = i+j, i {
-			out <- i
-		}
-	}()
-	return out
+type Customer struct {
+	id string
 }
+
+func (c *Customer) update(s string) {
+	fmt.Printf("Sending email to customer %s for item %s\n", c.id, s)
+}
+
+func (c *Customer) getID() string {
+	return c.id
+}
+
+
