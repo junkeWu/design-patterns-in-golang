@@ -2,6 +2,7 @@ package composite
 
 import (
 	"container/list"
+	"fmt"
 	"reflect"
 	"strconv"
 )
@@ -41,4 +42,17 @@ func (e *Employee) GetSubordinate() *list.List {
 
 func (e *Employee) ToString() string {
 	return "[Name : " + e.Name + ", Dept: " + e.Dept + ", Salary: " + strconv.Itoa(e.Salary) + "]"
+}
+
+func PrintTree(em *Employee) {
+	for i := em.Subordinates.Front(); i != nil; i = i.Next() {
+		em := i.Value.(Employee)
+		fmt.Println(em.ToString())
+		for j :=em.Subordinates.Front(); j != nil; j = j.Next() {
+			em = j.Value.(Employee)
+			fmt.Println(em.ToString())
+			PrintTree(&em)
+		}
+	}
+	fmt.Println("此分支已无人")
 }
