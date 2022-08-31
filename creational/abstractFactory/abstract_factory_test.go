@@ -3,7 +3,7 @@ package abstractFactory
 import "testing"
 
 func TestAbstractFactory(t *testing.T) {
-	factory := NewFactory()
+	factory := NewFactory(2)
 
 	appleFactory := factory.CreatAppleFactory()
 	appleFactory.create().eat()
@@ -12,4 +12,3 @@ func TestAbstractFactory(t *testing.T) {
 
 	factory.CreatBananaFactory().create().eat()
 }
-

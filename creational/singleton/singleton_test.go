@@ -9,8 +9,9 @@ import (
 )
 
 var mu2 sync.Mutex
+
 func Test_getIns(t *testing.T) {
-	ch := make(chan int, 1)
+	ch := make(chan int, 10)
 	wg := sync.WaitGroup{}
 	for i := 0; i < 10; i++ {
 		wg.Add(1)
@@ -20,8 +21,8 @@ func Test_getIns(t *testing.T) {
 			mu2.Lock()
 			instanceOnce.IncrementAge()
 			age := instanceOnce.age
-			//fmt.Printf("address: %p\n", instanceOnce)
-			//fmt.Printf("age1: %v\n ", instanceOnce.age)
+			// fmt.Printf("address: %p\n", instanceOnce)
+			// fmt.Printf("age1: %v\n ", instanceOnce.age)
 			mu2.Unlock()
 			time.Sleep(time.Millisecond * 1000)
 			// 把通道和锁分开，避免死锁
@@ -29,18 +30,18 @@ func Test_getIns(t *testing.T) {
 		}()
 		fmt.Printf("")
 	}
-
+	wg.Wait()
+	close(ch)
 	var res []int
 	for v := range ch {
 		res = append(res, v)
 	}
-	wg.Wait()
-	close(ch)
-	//var res []int
-	//// 取出通道数据
-	//for v := range ch {
+
+	// var res []int
+	// // 取出通道数据
+	// for v := range ch {
 	//	res = append(res, v)
-	//}
+	// }
 	// 顺序打印
 	sort.Ints(res)
 	for _, v := range res {
@@ -59,8 +60,8 @@ func Test_getInstanceLazy(t *testing.T) {
 			mu2.Lock()
 			instanceOnce.IncrementAge()
 			age := instanceOnce.age
-			//fmt.Printf("address: %p\n", instanceOnce)
-			//fmt.Printf("age1: %v\n ", instanceOnce.age)
+			// fmt.Printf("address: %p\n", instanceOnce)
+			// fmt.Printf("age1: %v\n ", instanceOnce.age)
 			mu2.Unlock()
 			time.Sleep(time.Millisecond * 100)
 			ch <- age

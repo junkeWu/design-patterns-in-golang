@@ -4,19 +4,21 @@ import (
 	"fmt"
 )
 
-type Apple struct {}
+type Apple struct{}
 
-type Pear struct {}
+type Pear struct{}
 
-type Banana struct {}
+type Banana struct{}
 
-type AppleFactory struct {}
+type AppleFactory struct{}
 
-type BearFactory struct {}
+type BearFactory struct{}
 
-type BananaFactory struct {}
+type BananaFactory struct{}
 
-type Factory struct {}
+type Factory struct {
+	size int
+}
 
 type Fruit interface {
 	eat()
@@ -52,9 +54,8 @@ func (b *Banana) eat() {
 	fmt.Println("Banana: eating banana")
 }
 
-
-func NewFactory() *Factory {
-	return &Factory{}
+func NewFactory(size int, option ...interface{}) *Factory {
+	return &Factory{size: size}
 }
 
 func (f *Factory) CreatAppleFactory() FruitFactory {
@@ -68,4 +69,3 @@ func (f *Factory) CreatBearFactory() FruitFactory {
 func (f *Factory) CreatBananaFactory() FruitFactory {
 	return &BananaFactory{}
 }
-
